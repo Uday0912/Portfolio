@@ -1,0 +1,76 @@
+.submit-button{
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.icon{
+    position: relative;
+    margin-right: 8px;
+    transition: none;
+    margin-left: 0;
+    margin-top: 0;
+}
+
+.submit-button:hover{
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.icon > svg{
+    transition: none;
+    transform: none;
+}
+
+.submit-button:hover > .icon{
+    animation: none;
+    margin: 0;
+}
+
+.submit-button > input {
+    display: none;
+}
+
+@keyframes icon {
+    0%{
+        margin: 0;
+    }
+    25%{
+        margin-top: 5px;
+    }
+    50%{
+        margin: 0;
+    }
+    75%{
+        margin-top: -5px;
+    }
+    100%{
+        margin: 0;
+    }
+}
+
+/* Dark mode styles */
+:root[data-theme="dark"] .submit-button{
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(124, 58, 237, 0.1));
+    border: 1px solid rgba(124, 58, 237, 0.5);
+    color: #e5e7eb;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.15);
+}
+
+:root[data-theme="dark"] .submit-button:hover{
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.4), rgba(124, 58, 237, 0.2));
+    border-color: rgba(124, 58, 237, 0.7);
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+    transform: translateY(-2px);
+}

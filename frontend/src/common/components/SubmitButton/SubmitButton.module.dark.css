@@ -1,0 +1,15 @@
+/* Dark mode styles for Submit Button */
+:root[data-theme="dark"] .submit-button{
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(124, 58, 237, 0.1));
+    border: 1px solid rgba(124, 58, 237, 0.5);
+    color: #e5e7eb;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.15);
+}
+
+:root[data-theme="dark"] .submit-button:hover{
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.4), rgba(124, 58, 237, 0.2));
+    border-color: rgba(124, 58, 237, 0.7);
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+    transform: translateY(-2px);
+}

@@ -1,0 +1,130 @@
+.container {
+  position: relative;
+  animation: fadeInScale 0.4s ease-out;
+}
+
+.button {
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+}
+
+.button:hover {
+  animation: float 3s ease-in-out infinite, glow 0.6s ease-out;
+}
+
+.button:active {
+  animation: none;
+}
+
+.arrow {
+  animation: bounce 2s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.button:hover .arrow {
+  animation: bounce 0.6s ease-in-out;
+  transform: translateY(-2px);
+}
+
+.progressRing {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #10b981 0deg,
+    #06b6d4 180deg,
+    transparent var(--progress)
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  animation: rotateProgress 2s linear infinite;
+}
+
+.pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, currentColor, transparent);
+  color: #10b981;
+  opacity: 0;
+  animation: pulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes rotateProgress {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .button {
+    width: 48px;
+    height: 48px;
+  }
+}
