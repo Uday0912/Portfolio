@@ -5,11 +5,11 @@ const Certifications = () => {
   const certifications = [
     {
       id: 1,
-      title: "Full Stack Web Development",
-      issuer: "Infoys SpringBoard",
-      date: "2023",
-      icon: "🎓",
-      description: "Comprehensive course covering React, Node.js, and MongoDB",
+      title: "Technology Software Development Job Simulation",
+      issuer: "Citi (Forage)",
+      date: "May 2025",
+      icon: "🏦",
+      description:"Hands-on experience in system design, feature proposals, and data analysis within a FinTech simulation."
     },
     {
       id: 2,
@@ -20,13 +20,13 @@ const Certifications = () => {
       description: "Advanced JavaScript concepts and ES6+ features",
     },
     {
-      id: 3,
-      title: "React Advanced Patterns",
-      issuer: "Infoys SpringBoard",
-      date: "2024",
-      icon: "⚛️",
-      description: "Advanced React patterns, hooks, and performance optimization",
-    },
+        id: 1,
+        title: "Full Stack Web Development",
+        issuer: "Infosys Springboard",
+        date: "2023",
+        icon: "🎓",
+        description: "Comprehensive full stack web development training with modern technologies.",
+      },
     {
       id: 4,
       title: "Foundations of AI",
