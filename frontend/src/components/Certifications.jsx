@@ -14,10 +14,10 @@ const Certifications = () => {
     {
       id: 2,
       title: "Python",
-      issuer: "Infoys SpringBoard",
+      issuer: "Infosys Springboard",
       date: "2023",
       icon: "📜",
-      description: "Advanced JavaScript concepts and ES6+ features",
+      description: "Core Python programming concepts including data types, control flow, functions, and modules.",
     },
     {
         id: 1,
