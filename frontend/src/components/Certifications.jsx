@@ -20,7 +20,7 @@ const Certifications = () => {
       description: "Core Python programming concepts including data types, control flow, functions, and modules.",
     },
     {
-        id: 1,
+        id: 3,
         title: "Full Stack Web Development",
         issuer: "Infosys Springboard",
         date: "2023",
