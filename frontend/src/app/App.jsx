@@ -35,7 +35,7 @@ import foodfusion from "../assets/images/foodfusion.png";
 import protofolio from "../assets/images/protofolio.png";
 import citizenSpark from "../assets/images/citizenSpark.png";
 import smartread from "../assets/images/chat.png";
-import donation from "../assets/images/donation.jpg";
+import donation from "../assets/images/Donation.jpg";
 import insurance from "../assets/images/insurance.jpg";
 import job from "../assets/images/job.jpg";
 
