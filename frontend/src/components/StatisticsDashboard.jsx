@@ -6,14 +6,14 @@ const stats = [
   {
     icon: FaCode,
     label: 'Projects Completed',
-    value: 8,
+    value: 7,
     color: '#10b981',
     description: 'Full-stack applications and tools'
   },
   {
     icon: FaGithub,
     label: 'GitHub Repositories',
-    value: 12,
+    value: 14,
     color: '#06b6d4',
     description: 'Open source and personal projects'
   },

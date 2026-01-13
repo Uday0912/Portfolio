@@ -9,31 +9,49 @@ const Certifications = () => {
       issuer: "Citi (Forage)",
       date: "May 2025",
       icon: "🏦",
-      description:"Hands-on experience in system design, feature proposals, and data analysis within a FinTech simulation."
+      description:
+        "Hands-on experience in system design, feature proposals, and data analysis within a FinTech simulation.",
+      link: "https://drive.google.com/file/d/12l2LCV2FHblWWPbQ1C5AVCqa2PDzKzbd/view?usp=sharing",
     },
     {
       id: 2,
-      title: "Python",
+      title: "Web Development",
       issuer: "Infosys Springboard",
       date: "2023",
-      icon: "📜",
-      description: "Core Python programming concepts including data types, control flow, functions, and modules.",
+      icon: "🎓",
+      description:
+        "Comprehensive front-end development training covering HTML, CSS, JavaScript, React, and modern UI practices.",
+      link: "https://drive.google.com/file/d/1IL1TpJXc_iJ0vO4Ry2CjsDd_hGBqaeEB/view?usp=sharing",
     },
     {
-        id: 3,
-        title: "Full Stack Web Development",
-        issuer: "Infosys Springboard",
-        date: "2023",
-        icon: "🎓",
-        description: "Comprehensive full stack web development training with modern technologies.",
-      },
-    {
-      id: 4,
+      id: 3,
       title: "Foundations of AI",
-      issuer: "AICTE",
+      issuer: "Microsoft Initiative (Edunet Foundation, AICTE)",
       date: "2024",
       icon: "🤖",
-      description: "Machine learning algorithms, deep learning, and AI fundamentals",
+      description:
+        "Fundamentals of artificial intelligence including machine learning concepts and real-world applications.",
+      link: "https://drive.google.com/file/d/1Xb87NlCAd-TG22iH0kpoNze0QluSbBFx/view?usp=sharing",
+    },
+    {
+      id: 4,
+      title: "AI–ML Virtual Internship",
+      issuer: "AICTE",
+      date: "2024",
+      icon: "🧠",
+      description:
+        "Practical exposure to machine learning workflows, model building, and real-world problem-solving.",
+      link: "https://drive.google.com/file/d/1GHVorkLn9GkZ6MsSEs7-Eva3tXFxduHm/view?usp=sharing",
+    },
+    {
+      id: 5,
+      title: "Fundamentals of C++",
+      issuer: "IBM (edX Verified Certificate)",
+      date: "2023",
+      icon: "💻",
+      description:
+        "Strong foundation in C++ programming, object-oriented concepts, and problem-solving techniques.",
+      link: "https://drive.google.com/file/d/1Wnag6pH-fdGB-f-Mdwpy8-G_zrTT3ylU/view?usp=sharing",
     },
   ];
 
@@ -68,18 +86,19 @@ const Certifications = () => {
         <div className={style.titleSection}>
           <h2 className={style.title}>Certifications & Credentials</h2>
           <p className={style.subtitle}>
-            Professional courses and certifications I've completed
+            Professional courses and certifications I’ve completed
           </p>
         </div>
+
         <motion.a
-          href="https://drive.google.com/drive/folders/YOUR_DRIVE_FOLDER_ID"
+          href="https://drive.google.com/drive/folders/1VPRjuKWptTG6lAuUMpLdN6sKKIhBia15?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className={style.driveButton}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          📁 View on Drive
+          📁 View Certificates
         </motion.a>
       </div>
 
@@ -96,6 +115,8 @@ const Certifications = () => {
             className={style.card}
             variants={cardVariants}
             whileHover="hover"
+            onClick={() => window.open(cert.link, "_blank")}
+            style={{ cursor: "pointer" }}
           >
             <div className={style.header}>
               <span className={style.icon}>{cert.icon}</span>
@@ -109,10 +130,7 @@ const Certifications = () => {
 
             <div className={style.footer}>
               <span className={style.date}>{cert.date}</span>
-              <motion.span
-                className={style.badge}
-                whileHover={{ scale: 1.05 }}
-              >
+              <motion.span className={style.badge} whileHover={{ scale: 1.05 }}>
                 Verified
               </motion.span>
             </div>

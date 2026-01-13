@@ -35,6 +35,9 @@ import foodfusion from "../assets/images/foodfusion.png";
 import protofolio from "../assets/images/protofolio.png";
 import citizenSpark from "../assets/images/citizenSpark.png";
 import smartread from "../assets/images/chat.png";
+import donation from "../assets/images/donation.jpg";
+import insurance from "../assets/images/insurance.jpg";
+import job from "../assets/images/job.jpg";
 
 // import style
 import style from "./App.module.css";
@@ -69,32 +72,126 @@ const mlAiSkills = [
 ];
 
 // Project data
+// const projects = [
+//   {
+//     name: "InsuranceAI – Lead Conversion Prediction",
+//     description:
+//       "Machine learning–driven system that predicts insurance lead conversion probability using supervised models, feature engineering, and model evaluation pipelines.",
+//     image: protofolio,
+//     link: null,
+//     github: "https://github.com/Uday0912/InsuranceAI",
+//   },
+//   {
+//     name: "Smart Donation Platform for NGOs",
+//     description:
+//       "Secure MERN-stack donation platform featuring role-based access, real-time transaction tracking, and ML-based fraud detection for transparent fund utilization.",
+//     image: smartread,
+//     link: null,
+//     github: "https://github.com/Uday0912/NGOs",
+//   },
+//   {
+//     name: "Job Application Assistant",
+//     description:
+//       "NLP-powered resume and job description analysis tool with ATS skill matching, automated PDF/DOCX parsing, summarization, and cover letter generation.",
+//     image: citizenSpark,
+//     link: null,
+//     github: "https://github.com/Uday0912/job-assistant",
+//   },
+//   {
+//     name: "CitizenSpark",
+//     description:
+//       "MGNREGA data analytics dashboard providing district-level insights on coverage, health metrics, and employment trends.",
+//     image: citizenSpark,
+//     link: "https://citizen-spark-iyt3dojr4-udays-projects-d8504db5.vercel.app/",
+//     github: "https://github.com/Uday0912/citizenSpark",
+//   },
+//   {
+//     name: "FoodFusion",
+//     description: "Recipe aggregation and recommendation platform with dynamic content and responsive UI.",
+//     image: foodfusion,
+//     link: "https://foodfusion-29.onrender.com/",
+//     github: "https://github.com/Uday0912/foodfusion",
+//   },
+//   {
+//     name: "Portfolio Website",
+//     description:
+//       "Responsive personal portfolio built with React, Vite, and Framer Motion showcasing projects and achievements.",
+//     image: protofolio,
+//     link: "https://portfolio-seven-delta-yv7xs51duy.vercel.app/",
+//     github: "https://github.com/Uday0912/Portfolio",
+//   },
+//   {
+//     name: "SmartRead",
+//     description:
+//       "AI-powered summarization platform providing concise insights from long-form articles and documents.",
+//     image: smartread,
+//     link: "https://smartread.example.com",
+//     github: "https://github.com/Uday0912/smartread",
+//   },
+// ];
 const projects = [
   {
+    name: "InsuranceAI – Lead Conversion Prediction",
+    description:
+      "Machine learning–driven system that predicts insurance lead conversion probability using supervised models and feature engineering.",
+    image: insurance,
+    deployed: false,
+    link: null,
+    github: "https://github.com/Uday0912/InsuranceAI",
+  },
+  {
+    name: "Smart Donation Platform for NGOs",
+    description:
+      "Secure MERN-stack donation platform with role-based access, real-time tracking, and ML-based fraud detection.",
+    image: donation,
+    deployed: false,
+    link: null,
+    github: "https://github.com/Uday0912/NGOs",
+  },
+  {
+    name: "Job Application Assistant",
+    description:
+      "NLP-powered resume and job description analysis tool with ATS matching, parsing, and summarization.",
+    image: job,
+    deployed: false,
+    link: null,
+    github: "https://github.com/Uday0912/job-assistant",
+  },
+
+  // ✅ DEPLOYED PROJECTS
+  {
     name: "CitizenSpark",
-    description: "MGNREGA Data Dashboard for districts: coverage, health, and trends.",
+    description:
+      "MGNREGA data analytics dashboard providing district-level insights on employment trends.",
     image: citizenSpark,
+    deployed: true,
     link: "https://citizen-spark-iyt3dojr4-udays-projects-d8504db5.vercel.app/",
     github: "https://github.com/Uday0912/citizenSpark",
   },
   {
     name: "FoodFusion",
-    description: "A recipe aggregator and recommendation app.",
+    description:
+      "Recipe aggregation and recommendation platform with responsive UI.",
     image: foodfusion,
+    deployed: true,
     link: "https://foodfusion-29.onrender.com/",
     github: "https://github.com/Uday0912/foodfusion",
   },
   {
     name: "Portfolio Website",
-    description: "Responsive personal portfolio built with React, Vite, and Framer Motion.",
+    description:
+      "Personal portfolio built with React, Vite, and Framer Motion.",
     image: protofolio,
+    deployed: true,
     link: "https://portfolio-seven-delta-yv7xs51duy.vercel.app/",
     github: "https://github.com/Uday0912/Portfolio",
   },
   {
     name: "SmartRead",
-    description: "AI-powered summarization and insights for long articles/documents.",
+    description:
+      "AI-powered summarization platform providing concise insights from long-form articles and documents.",
     image: smartread,
+    deployed: true,
     link: "https://smartread.example.com",
     github: "https://github.com/Uday0912/smartread",
   },
@@ -420,7 +517,7 @@ function App() {
                 className={style["profile-photo"]}
               />
             </motion.div>
-            <motion.div 
+            <motion.div
               className={style["about-info"]}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -532,8 +629,8 @@ function App() {
             <div className={style["achievement-group"]}>
               <h4>Competitive Programming</h4>
               <ul className={style["achievement-list"]}>
-                <li>LeetCode: Solved <strong>450+ problems</strong> and ranked in the <strong>Top 10%</strong> globally</li>
-                <li>CodeChef: Achieved <strong>2★</strong> with a maximum rating of <strong>1439+</strong></li>
+                <li>LeetCode: Solved <strong>500+ problems</strong> and ranked in the <strong>Top 10%</strong> globally</li>
+                <li>CodeChef: Achieved <strong>2★</strong> with a maximum rating of <strong>1440+</strong></li>
                 <li>Completed <strong>Citi Software Development Virtual Experience (2025)</strong> focused on scalable backend systems</li>
               </ul>
             </div>
@@ -548,37 +645,80 @@ function App() {
       </AnimatedSection>
 
       {/* Coding Profiles Section */}
+      {/* Coding Profiles Section */}
       <AnimatedSection id="Coding" className={style.coding}>
         <div className={style.container}>
           <h2 className={style.title}>Coding Profiles</h2>
           <div className={style.cards}>
+
+            {/* LeetCode */}
             <div className={style.card}>
-              <div style={{display:'flex',alignItems:'center',gap:10}}>
-                <SiLeetcode size={22} style={{color:'#f89f1b'}} />
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <SiLeetcode size={22} style={{ color: "#f89f1b" }} />
                 <h3>LeetCode</h3>
               </div>
               <p>• <strong>1700+</strong> Rating • Top 5.8%</p>
-              <a href="https://leetcode.com/u/UDAY_PARSHA/" target="_blank" rel="noopener noreferrer">Profile →</a>
+              <a
+                href="https://leetcode.com/u/UDAY_PARSHA/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Profile →
+              </a>
             </div>
+
+            {/* CodeChef */}
             <div className={style.card}>
-              <div style={{display:'flex',alignItems:'center',gap:10}}>
-                <SiCodechef size={22} style={{color:'#5b3d2a'}} />
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <SiCodechef size={22} style={{ color: "#5b3d2a" }} />
                 <h3>CodeChef</h3>
               </div>
-              <p><strong>2★</strong> • <strong>1430+</strong> Max Rating</p>
-              <a href="https://www.codechef.com/users/parshauday" target="_blank" rel="noopener noreferrer">Profile →</a>
+              <p><strong>2★</strong> • <strong>1440+</strong> Max Rating</p>
+              <a
+                href="https://www.codechef.com/users/parshauday"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Profile →
+              </a>
             </div>
+
+            {/* TakeUForward */}
             <div className={style.card}>
-              <div style={{display:'flex',alignItems:'center',gap:10}}>
-                <FaBook size={22} style={{color:'var(--text-secondary)'}} />
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <FaBook size={22} style={{ color: "var(--text-secondary)" }} />
                 <h3>TakeUForward</h3>
               </div>
               <p>Active Learner • Focus: DSA</p>
-              <a href="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2" target="_blank" rel="noopener noreferrer">Profile →</a>
+              <a
+                href="https://takeuforward.org/home"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Profile →
+              </a>
             </div>
+
+            {/* Codolio */}
+            <div className={style.card}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <FaBook size={22} style={{ color: "#4f46e5" }} />
+                <h3>Codolio</h3>
+              </div>
+              <p>Unified Coding Profile • DSA & Competitive Programming</p>
+              <a
+                href="https://codolio.com/profile/Uday_09"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Profile →
+              </a>
+            </div>
+
           </div>
         </div>
       </AnimatedSection>
+
 
       {/* Projects Section */}
       <AnimatedSection id="Projects" className={style.projects}>
@@ -608,7 +748,7 @@ function App() {
                 <div className={style["project-info"]}>
                   <h3>{project.name}</h3>
                   <p>{project.description}</p>
-                  <div className={style["project-buttons"]}>
+                  {/* <div className={style["project-buttons"]}>
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -637,7 +777,50 @@ function App() {
                         </IconButton>
                       </a>
                     </motion.div>
+                  </div> */}
+                  <div className={style["project-buttons"]}>
+                    {/* Live Demo / In Progress */}
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      {project.deployed ? (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={style["project-button-link"]}
+                        >
+                          <IconButton icon={<AiOutlineEye />}>
+                            Live Demo
+                          </IconButton>
+                        </a>
+                      ) : (
+                        <button
+                          className={style["project-button-link"]}
+                          disabled
+                          title="Deployment in progress"
+                          style={{ cursor: "not-allowed", opacity: 0.6 }}
+                        >
+                          <IconButton icon={<AiOutlineEye />}>
+                            In Progress
+                          </IconButton>
+                        </button>
+                      )}
+                    </motion.div>
+
+                    {/* GitHub (Always visible) */}
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={style["project-button-link"]}
+                      >
+                        <IconButton icon={<AiFillGithub />}>
+                          GitHub
+                        </IconButton>
+                      </a>
+                    </motion.div>
                   </div>
+
                 </div>
               </motion.div>
             ))}
@@ -741,7 +924,7 @@ function App() {
       <footer className={style.footer}>
         <div className={style.container}>
           <div className={style["footer-info"]}>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -753,7 +936,7 @@ function App() {
                 Learning.
               </p>
             </motion.div>
-            <motion.div 
+            <motion.div
               className={style.social}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -814,7 +997,7 @@ function App() {
               </div>
             </motion.div>
           </div>
-          <motion.div 
+          <motion.div
             className={style["copy-right"]}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
