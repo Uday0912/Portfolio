@@ -490,6 +490,33 @@ section {
   margin-right: auto;
 }
 
+/* Home CTA styled like minimal text-link button */
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(242, 157, 98, 0.5);
+  background: rgba(242, 157, 98, 0.12);
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  font-weight: 600;
+  color: #e37d34;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.download-button:hover {
+  background: rgba(242, 157, 98, 0.2);
+  border-color: rgba(242, 157, 98, 0.75);
+  transform: translateY(-2px);
+}
+
+.download-button > svg {
+  font-size: 0.9em;
+}
+
 /* Scroll Icon - Modernized */
 .scroll-icon {
   position: absolute;
@@ -499,23 +526,26 @@ section {
   z-index: 10;
 }
 .chevrons {
-  width: 30px;
-  height: 50px;
+  width: 28px;
+  height: 34px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: bounceScroll 2s infinite;
+  justify-content: center;
+  gap: 4px;
+  animation: none;
 }
 .chevron-down {
-  width: 30px;
-  height: 10px;
-  border-left: 3px solid var(--primary-color);
-  border-bottom: 3px solid var(--primary-color);
-  transform: rotate(-45deg); /* Keep this for arrow shape */
-  animation: none; /* Removed bounceScroll animation */
+  width: 12px;
+  height: 12px;
+  border-left: 2.5px solid #6a11cb;
+  border-bottom: 2.5px solid #6a11cb;
+  transform: rotate(-45deg);
+  animation: none;
+  opacity: 0.95;
 }
 .chevron-down:nth-child(2) {
-  animation: none; /* Removed fadeInOut animation */
+  opacity: 0.85;
 }
 
 @keyframes bounceScroll {
@@ -759,7 +789,8 @@ section {
   flex-grow: 1; /* Pushes buttons to bottom */
 }
 .project-buttons {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   margin-top: auto; /* Pushes buttons to bottom */
 }
@@ -781,6 +812,18 @@ section {
   border: 1px solid var(--border-color);
   background-color: var(--card-bg-color);
   color: var(--primary-color);
+  width: 100%;
+  min-width: 0;
+}
+
+.project-buttons :global(.button) {
+  width: 100%;
+  padding: 12px;
+}
+
+.project-buttons :global(.text) {
+  font-size: 0.95rem;
+  white-space: normal;
 }
 
 .project-buttons > div > button svg,
@@ -796,6 +839,153 @@ section {
   border-color: var(--primary-color);
   box-shadow: none; /* Removed box-shadow on hover */
   transform: none; /* Removed transform on hover */
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 16, 30, 0.62);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.project-modal {
+  width: min(920px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-description {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.case-block {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.case-block > h4 {
+  margin: 0 0 0.6rem 0;
+  color: var(--text-headings);
+}
+
+.case-block > p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.case-block > ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.tech-list > span {
+  border: 1px solid #cdb5f3;
+  background: #f3edff;
+  color: #8c75e8;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.modal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.modal-links > a,
+.disabled-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.85rem;
+  padding: 0.82rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid #e1e5ee;
+  text-decoration: none;
+  font-weight: 800;
+  font-family: "Poppins", "Inter", sans-serif;
+  font-size: clamp(1.05rem, 1.35vw, 1.28rem);
+  line-height: 1;
+  min-width: 175px;
+  position: relative;
+}
+
+.modal-links > a::before,
+.disabled-link::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: radial-gradient(circle at 35% 35%, #8b7af2, #4d62e4);
+  box-shadow: 0 0 0 6px rgba(77, 98, 228, 0.1), 0 0 18px rgba(96, 92, 230, 0.5);
+}
+
+.modal-links > a {
+  color: #64a0f5;
+  background: #ffffff;
+}
+
+.modal-links > a:hover {
+  color: #5b94ea;
+  border-color: #d8dfea;
+  transform: translateY(-1px);
+}
+
+.disabled-link {
+  color: #97a2b8;
+  background: #f7f9fc;
 }
 
 /* Contact Section */
@@ -873,7 +1063,9 @@ section {
   text-decoration: underline;
 }
 .contact > .container > form {
-  max-width: 700px; /* Wider form */
+  max-width: 600px; /* Slightly narrower for better fit on small screens */
+  width: 100%; /* Ensure it never overflows horizontally */
+  box-sizing: border-box;
   margin: 3rem auto 0 auto;
   background-color: var(--card-bg-color);
   padding: 2.5rem; /* More padding */
@@ -1083,6 +1275,10 @@ section {
 
 @media (max-width: 768px) {
   /* Mobile */
+  section {
+    padding: 80px 0; /* Reduce vertical padding on small screens */
+    min-height: auto; /* Let sections size based on content */
+  }
   .nav > ul {
     display: none; /* Hide desktop nav links */
   }
@@ -1145,6 +1341,14 @@ section {
   .my-skill.full-width-skill-area {
     margin-top: 1.5rem; /* Adjust top margin for skills on mobile */
   }
+
+  .case-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-modal {
+    padding: 1.1rem;
+  }
 }
 
 /* Added a new media query for smaller mobile screens */
@@ -1162,7 +1366,7 @@ section {
     padding: 1.5rem; /* Reduce form padding on very small screens */
   }
   .project-buttons {
-    flex-direction: column; /* Stack project buttons on very small screens */
+    grid-template-columns: 1fr; /* Stack buttons on very small screens */
     gap: 0.75rem;
   }
 }

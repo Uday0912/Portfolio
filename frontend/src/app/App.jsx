@@ -17,7 +17,7 @@ import IconButton from "../common/components/IconButton/IconButton";
 import StatisticsDashboard from "../components/StatisticsDashboard";
 import SkillProficiency from "../components/SkillProficiency";
 import Certifications from "../components/Certifications";
-import GoogleAnalytics, { trackEvent } from "../components/GoogleAnalytics";
+
 
 // import icons
 import { AiFillGithub, AiFillLinkedin, AiOutlineEye, AiOutlineDownload } from "react-icons/ai";
@@ -41,6 +41,34 @@ import job from "../assets/images/job.jpg";
 
 // import style
 import style from "./App.module.css";
+
+const GoogleAnalytics = ({ measurementId }) => {
+  useEffect(() => {
+    const id = (measurementId || "").trim();
+    if (!id || id === "G-YOUR_MEASUREMENT_ID") return;
+
+    const existing = document.querySelector(`script[data-ga4="${id}"]`);
+    if (existing) return;
+
+    const gtagScript = document.createElement("script");
+    gtagScript.async = true;
+    gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
+    gtagScript.setAttribute("data-ga4", id);
+    document.head.appendChild(gtagScript);
+
+    const inline = document.createElement("script");
+    inline.setAttribute("data-ga4-inline", id);
+    inline.text = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${id}');
+    `;
+    document.head.appendChild(inline);
+  }, [measurementId]);
+
+  return null;
+};
 
 const sdeSkills = [
   { name: "HTML 5", cssName: "html" /* icon: <FaHtml5 /> */ },
@@ -138,6 +166,25 @@ const projects = [
     deployed: false,
     link: null,
     github: "https://github.com/Uday0912/InsuranceAI",
+    caseStudy: {
+      problem:
+        "Insurance teams need to prioritize promising leads, but manual screening is slow and inconsistent.",
+      approach:
+        "Built an ML pipeline for feature engineering, model training, and probability scoring to rank conversion likelihood.",
+      features: [
+        "Automated preprocessing pipeline for cleaning and transforming lead data",
+        "Model comparison workflow to evaluate multiple supervised algorithms",
+        "Probability-based lead ranking dashboard for prioritization",
+      ],
+      challenges:
+        "Handled class imbalance and noisy lead attributes to keep predictions reliable across different lead segments.",
+      results: [
+        "Created a repeatable workflow from preprocessing to prediction",
+        "Improved decision speed with interpretable lead scores",
+        "Enabled data-backed targeting for sales follow-ups",
+      ],
+      tech: ["Python", "Pandas", "Scikit-learn", "Matplotlib"],
+    },
   },
   {
     name: "Smart Donation Platform for NGOs",
@@ -147,6 +194,25 @@ const projects = [
     deployed: false,
     link: null,
     github: "https://github.com/Uday0912/NGOs",
+    caseStudy: {
+      problem:
+        "NGOs often lack transparent and trustworthy digital systems for donation tracking and accountability.",
+      approach:
+        "Developed a role-based MERN platform with secure auth, transaction visibility, and fraud-risk checks.",
+      features: [
+        "Role-based access for donors, NGOs, and admins",
+        "End-to-end donation tracking with status visibility",
+        "Fraud-aware checks to flag suspicious transaction patterns",
+      ],
+      challenges:
+        "Balanced security and usability while handling donation flows, role permissions, and reporting in one system.",
+      results: [
+        "Streamlined donor-to-campaign payment flow",
+        "Improved transparency through clear status tracking",
+        "Added trust signals with fraud-aware verification logic",
+      ],
+      tech: ["React", "Node.js", "Express", "MongoDB", "JWT"],
+    },
   },
   {
     name: "Job Application Assistant",
@@ -156,6 +222,25 @@ const projects = [
     deployed: false,
     link: null,
     github: "https://github.com/Uday0912/job-assistant",
+    caseStudy: {
+      problem:
+        "Applicants struggle to align resumes with job descriptions and identify ATS-relevant skill gaps quickly.",
+      approach:
+        "Implemented document parsing and NLP matching to score alignment and suggest focused resume improvements.",
+      features: [
+        "Resume and job description parsing from common document formats",
+        "ATS-style keyword and skills alignment scoring",
+        "Actionable improvement suggestions based on mismatch analysis",
+      ],
+      challenges:
+        "Improved extraction quality across varying resume formats and ensured scoring remained interpretable to users.",
+      results: [
+        "Reduced manual comparison effort for each application",
+        "Generated concise fit summaries and actionable insights",
+        "Supported more targeted, role-specific submissions",
+      ],
+      tech: ["Python", "NLP", "Streamlit", "PDF/DOCX Parsing"],
+    },
   },
 
   // ✅ DEPLOYED PROJECTS
@@ -167,6 +252,25 @@ const projects = [
     deployed: true,
     link: "https://citizen-spark-iyt3dojr4-udays-projects-d8504db5.vercel.app/",
     github: "https://github.com/Uday0912/citizenSpark",
+    caseStudy: {
+      problem:
+        "Public welfare data is large but hard to interpret for quick district-level decision making.",
+      approach:
+        "Built an interactive dashboard that cleans, aggregates, and visualizes key employment indicators.",
+      features: [
+        "District-wise drilldowns for targeted data exploration",
+        "Trend visualizations across periods for employment metrics",
+        "Readable summary views for quick stakeholder understanding",
+      ],
+      challenges:
+        "Normalized heterogeneous public data sources and focused on clarity so non-technical users could interpret insights.",
+      results: [
+        "Made trends easier to compare across districts and periods",
+        "Improved clarity with intuitive visual storytelling",
+        "Enabled faster, evidence-based exploration of MGNREGA metrics",
+      ],
+      tech: ["React", "JavaScript", "Charts", "Data Visualization"],
+    },
   },
   {
     name: "FoodFusion",
@@ -176,6 +280,25 @@ const projects = [
     deployed: true,
     link: "https://foodfusion-29.onrender.com/",
     github: "https://github.com/Uday0912/foodfusion",
+    caseStudy: {
+      problem:
+        "Users want recipe discovery and recommendations in one simple, mobile-friendly interface.",
+      approach:
+        "Created a responsive UI with search, filtering, and recommendation-oriented browsing patterns.",
+      features: [
+        "Search and filter controls for quick recipe discovery",
+        "Responsive layout optimized for mobile cooking use-cases",
+        "Structured content cards for ingredients and preparation flow",
+      ],
+      challenges:
+        "Kept interactions fast and intuitive while presenting rich recipe content across devices with different screen sizes.",
+      results: [
+        "Improved recipe discovery speed with structured content",
+        "Delivered smooth UX across desktop and mobile",
+        "Reduced friction from search to cooking decision",
+      ],
+      tech: ["React", "Node.js", "Express", "MongoDB", "CSS"],
+    },
   },
   {
     name: "Portfolio Website",
@@ -185,6 +308,25 @@ const projects = [
     deployed: true,
     link: "https://portfolio-seven-delta-yv7xs51duy.vercel.app/",
     github: "https://github.com/Uday0912/Portfolio",
+    caseStudy: {
+      problem:
+        "Recruiters need a quick, credible way to assess skills, project depth, and communication quality.",
+      approach:
+        "Designed a modern single-page portfolio with clear sections, animation polish, and direct contact pathways.",
+      features: [
+        "Clear project storytelling with structured case-study content",
+        "Responsive design and polished interactions across sections",
+        "Multiple contact paths to reduce user drop-off",
+      ],
+      challenges:
+        "Balanced visual polish with performance and readability, especially across mobile and desktop breakpoints.",
+      results: [
+        "Improved project storytelling and technical clarity",
+        "Provided a stronger first impression with better UX",
+        "Enabled easier outreach with multi-channel contact options",
+      ],
+      tech: ["React", "Vite", "Framer Motion", "CSS Modules"],
+    },
   },
   {
     name: "SmartRead",
@@ -194,6 +336,25 @@ const projects = [
     deployed: true,
     link: "https://smartread.example.com",
     github: "https://github.com/Uday0912/smartread",
+    caseStudy: {
+      problem:
+        "Readers spend too much time extracting key points from long documents and articles.",
+      approach:
+        "Built an AI-powered summarization flow focused on concise output and readability.",
+      features: [
+        "Long-form text ingestion and concise summary generation",
+        "Readable output format tuned for quick scanning",
+        "Workflow designed for faster comprehension and retention",
+      ],
+      challenges:
+        "Maintained summary quality while preserving intent and key context from diverse long-form inputs.",
+      results: [
+        "Reduced reading time through compact summaries",
+        "Preserved core context while cutting content length",
+        "Offered a faster way to digest long-form information",
+      ],
+      tech: ["Python", "NLP", "AI Summarization", "Web App"],
+    },
   },
 ];
 
@@ -224,8 +385,9 @@ function App() {
     restDelta: 0.001,
   });
 
-  // State initialization
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState("light");
+
+
   // Load persisted theme and apply to :root
   useEffect(() => {
     const stored = localStorage.getItem('theme');
@@ -247,12 +409,32 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  useEffect(() => {
+    if (!selectedProject) return undefined;
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setSelectedProject(null);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [selectedProject]);
 
   const sendEmail = (e) => {
     e.preventDefault();
     setLoading(true);
     setEmailSent(false);
     setError(null);
+
+    const apiBase = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
 
     const formData = {
       from_name: form.current.elements['from_name'].value,
@@ -261,30 +443,67 @@ function App() {
     };
 
     // Send to backend API
-    fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+    const controller = new AbortController();
+    const timeoutMs = 20000;
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+    fetch(`${apiBase}/api/contact`, {
       method: 'POST',
+      signal: controller.signal,
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData)
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
+      .then(async (response) => {
+        const contentType = response.headers.get("content-type") || "";
+        const isJson = contentType.includes("application/json");
+        const data = isJson ? await response.json() : await response.text();
+
+        if (!response.ok) {
+          const message = (() => {
+            if (typeof data === "string") return data;
+            const base = data?.error || data?.message || `Request failed (${response.status})`;
+            const details = data?.details ? ` (${data.details})` : "";
+            return `${base}${details}`;
+          })();
+          throw new Error(message);
+        }
+
+        return data;
+      })
+      .then((data) => {
+        if (typeof data === "object" && data?.success) {
           console.log('Success:', data.message);
           form.current.reset();
           setLoading(false);
           setEmailSent(true);
           setTimeout(() => setEmailSent(false), 4000);
         } else {
-          throw new Error(data.error || 'Failed to send message');
+          const message = (() => {
+            if (typeof data === "string") return data;
+            const base = data?.error || data?.message || "Failed to send message";
+            const details = data?.details ? ` (${data.details})` : "";
+            return `${base}${details}`;
+          })();
+          throw new Error(message);
         }
       })
       .catch(error => {
-        console.error('Error:', error);
         setLoading(false);
-        setError(`Failed to send message: ${error.message}. Please try again later.`);
+        const isAbort = error?.name === "AbortError";
+        if (!isAbort) {
+          console.error('Error:', error);
+        }
+        const msg =
+          isAbort
+            ? `Request timed out after ${Math.round(timeoutMs / 1000)}s. Please try again.`
+            : `Failed to send message: ${error.message}. Please try again later.`;
+        setError(msg);
         setTimeout(() => setError(null), 4000);
+      })
+      .finally(() => {
+        clearTimeout(timeoutId);
       });
   };
 
@@ -308,7 +527,7 @@ function App() {
   return (
     <div className={style.app}>
       {/* Google Analytics Component - Track visitor analytics */}
-      <GoogleAnalytics measurementId="G-YOUR_MEASUREMENT_ID" />
+      <GoogleAnalytics measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID} />
 
       <motion.div className={style["progress-bar"]} style={{ scaleX }} />
 
@@ -525,18 +744,10 @@ function App() {
             >
               <h3>Get to know me!</h3>
               <p>
-                As a dedicated B.Tech Computer Science student at Gayatri Vidya
-                Parishad, I possess a strong foundation in software engineering
-                principles, with specialized expertise in Data Structures,
-                Algorithms, Machine Learning, MERN stack development, and
-                Generative AI.
+                As a dedicated B.Tech Computer Science student, I possess a solid foundation in software engineering principles, with hands-on experience in Data Structures and Algorithms, MERN stack development, and core backend technologies. I am also exploring Machine Learning and AI-based applications to expand my technical expertise.
               </p>
               <p>
-                Key attributes include a proactive approach to problem-solving,
-                a proven ability to deliver reliable results, and a
-                collaborative spirit. I am eager to contribute my technical
-                proficiency and commitment to innovation to a challenging and
-                growth-oriented role.
+                My key strengths include a proactive approach to problem-solving, strong debugging skills, and the ability to build practical, real-world projects. I am highly motivated to contribute my technical knowledge and continuously grow in a challenging and innovation-driven environment.
               </p>
             </motion.div>
             <motion.div
@@ -779,6 +990,18 @@ function App() {
                     </motion.div>
                   </div> */}
                   <div className={style["project-buttons"]}>
+                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                      <button
+                        type="button"
+                        className={style["project-button-link"]}
+                        onClick={() => setSelectedProject(project)}
+                      >
+                        <IconButton as="span" icon={<FaBook />}>
+                          Case Study
+                        </IconButton>
+                      </button>
+                    </motion.div>
+
                     {/* Live Demo / In Progress */}
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                       {project.deployed ? (
@@ -788,7 +1011,7 @@ function App() {
                           rel="noopener noreferrer"
                           className={style["project-button-link"]}
                         >
-                          <IconButton icon={<AiOutlineEye />}>
+                          <IconButton as="span" icon={<AiOutlineEye />}>
                             Live Demo
                           </IconButton>
                         </a>
@@ -799,7 +1022,7 @@ function App() {
                           title="Deployment in progress"
                           style={{ cursor: "not-allowed", opacity: 0.6 }}
                         >
-                          <IconButton icon={<AiOutlineEye />}>
+                          <IconButton as="span" icon={<AiOutlineEye />}>
                             In Progress
                           </IconButton>
                         </button>
@@ -814,7 +1037,7 @@ function App() {
                         rel="noopener noreferrer"
                         className={style["project-button-link"]}
                       >
-                        <IconButton icon={<AiFillGithub />}>
+                        <IconButton as="span" icon={<AiFillGithub />}>
                           GitHub
                         </IconButton>
                       </a>
@@ -827,6 +1050,83 @@ function App() {
           </motion.div>
         </div>
       </AnimatedSection>
+
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            className={style["modal-overlay"]}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              className={style["project-modal"]}
+              initial={{ y: 24, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 24, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className={style["modal-close"]}
+                onClick={() => setSelectedProject(null)}
+                aria-label="Close case study"
+              >
+                ×
+              </button>
+
+              <h3>{selectedProject.name}</h3>
+              <p className={style["modal-description"]}>{selectedProject.description}</p>
+
+              <div className={style["case-grid"]}>
+                <div className={style["case-block"]}>
+                  <h4>Problem Statement</h4>
+                  <p>{selectedProject.caseStudy.problem}</p>
+                </div>
+
+                <div className={style["case-block"]}>
+                  <h4>Approach</h4>
+                  <p>{selectedProject.caseStudy.approach}</p>
+                </div>
+
+                <div className={style["case-block"]}>
+                  <h4>Key Features</h4>
+                  <ul>
+                    {selectedProject.caseStudy.features.map((item, idx) => (
+                      <li key={`${selectedProject.name}-feature-${idx}`}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className={style["case-block"]}>
+                  <h4>Challenges</h4>
+                  <p>{selectedProject.caseStudy.challenges}</p>
+                </div>
+
+                <div className={style["case-block"]}>
+                  <h4>Results</h4>
+                  <ul>
+                    {selectedProject.caseStudy.results.map((item, idx) => (
+                      <li key={`${selectedProject.name}-result-${idx}`}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className={style["case-block"]}>
+                  <h4>Tech</h4>
+                  <div className={style["tech-list"]}>
+                    {selectedProject.caseStudy.tech.map((item) => (
+                      <span key={`${selectedProject.name}-tech-${item}`}>{item}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Skill Proficiency Section */}
       <AnimatedSection id="Skills" className={style.skills}>
@@ -855,7 +1155,8 @@ function App() {
           <h2 className={style.title}>Get In Touch</h2>
           <p className={style["section-description"]}>
             Have a project in mind or just want to connect? Feel free to reach
-            out!
+            out! If the form or email link doesn&apos;t work, you can always
+            reach me on LinkedIn.
           </p>
           <motion.form
             ref={form}
@@ -917,6 +1218,22 @@ function App() {
               </motion.p>
             )}
           </motion.form>
+          <motion.div
+            style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center" }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <a
+              href="https://www.linkedin.com/in/parshauday/"
+              target="_blank"
+              rel="noreferrer"
+              style={{ textDecoration: "none" }}
+            >
+              <SubmitButton type="button" icon={<AiFillLinkedin />}>
+                Contact on LinkedIn
+              </SubmitButton>
+            </a>
+          </motion.div>
         </div>
       </AnimatedSection>
 

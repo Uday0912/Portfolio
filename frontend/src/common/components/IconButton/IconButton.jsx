@@ -2,9 +2,20 @@ import React from 'react'
 
 import style from './IconButton.module.css'
 
-function IconButton({ width , height , icon , children , color , backgroundColor }){
+function IconButton({
+    width,
+    height,
+    icon,
+    children,
+    color,
+    backgroundColor,
+    as = "button",
+    type = "button",
+    ...rest
+}){
+    const Component = as === "span" ? "span" : "button";
     return (
-        <button 
+        <Component
             className={style.button}
                 style={{
                     width: width,
@@ -12,10 +23,12 @@ function IconButton({ width , height , icon , children , color , backgroundColor
                     backgroundColor: backgroundColor,
                     color: color
                 }}
+            {...(Component === "button" ? { type } : {})}
+            {...rest}
             >
                 {icon && <span className={style.icon}>{icon}</span>}
                 <span className={style.text}>{children}</span>
-            </button>
+            </Component>
     )
 }
 

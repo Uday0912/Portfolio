@@ -9,35 +9,47 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Validate environment variables
-if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
-  console.error('❌ ERROR: Missing EMAIL_USER or EMAIL_PASSWORD in .env file');
-  console.error('Please create a .env file with:');
-  console.error('  EMAIL_USER=your-email@gmail.com');
-  console.error('  EMAIL_PASSWORD=your-app-password');
-  process.exit(1);
+const emailConfigured = Boolean(process.env.EMAIL_USER && process.env.EMAIL_PASSWORD);
+if (!emailConfigured) {
+  console.warn('⚠️  EMAIL_USER / EMAIL_PASSWORD not set. Contact form will return 503 until configured.');
+} else {
+  console.log('✅ Environment variables loaded');
+  console.log(`📧 Email: ${process.env.EMAIL_USER}`);
 }
 
-console.log('✅ Environment variables loaded');
-console.log(`📧 Email: ${process.env.EMAIL_USER}`);
+function withTimeout(promise, ms, label) {
+  let timeoutId;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => reject(new Error(`${label} (timeout after ${ms}ms)`)), ms);
+  });
+  return Promise.race([promise, timeoutPromise]).finally(() => clearTimeout(timeoutId));
+}
 
 // Configure nodemailer
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER.trim(),
-    pass: process.env.EMAIL_PASSWORD.trim(),
-  },
-});
+const transporter = emailConfigured
+  ? nodemailer.createTransport({
+      host: process.env.SMTP_HOST || 'smtp.gmail.com',
+      port: Number(process.env.SMTP_PORT || 465),
+      secure: String(process.env.SMTP_SECURE || 'true').toLowerCase() === 'true',
+      auth: {
+        user: process.env.EMAIL_USER.trim(),
+        pass: process.env.EMAIL_PASSWORD.trim(),
+      },
+      connectionTimeout: Number(process.env.SMTP_CONNECTION_TIMEOUT_MS || 10000),
+      greetingTimeout: Number(process.env.SMTP_GREETING_TIMEOUT_MS || 10000),
+      socketTimeout: Number(process.env.SMTP_SOCKET_TIMEOUT_MS || 15000),
+    })
+  : null;
 
-// Test email connection
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('❌ Email verification failed:', error.message);
-  } else {
-    console.log('✅ Email server ready!');
-  }
-});
+if (transporter) {
+  transporter.verify((error) => {
+    if (error) {
+      console.error('❌ Email verification failed:', error.message);
+    } else {
+      console.log('✅ Email server ready!');
+    }
+  });
+}
 
 // Routes
 app.get('/api/health', (req, res) => {
@@ -47,6 +59,14 @@ app.get('/api/health', (req, res) => {
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
   try {
+    if (!transporter) {
+      return res.status(503).json({
+        success: false,
+        error: 'Email service not configured',
+        details: 'Set EMAIL_USER and EMAIL_PASSWORD in backend .env, then restart the server.',
+      });
+    }
+
     const { from_name, reply_to, message } = req.body;
 
     // Validation
@@ -69,7 +89,11 @@ app.post('/api/contact', async (req, res) => {
       `,
     };
 
-    await transporter.sendMail(mailOptions);
+    await withTimeout(
+      transporter.sendMail(mailOptions),
+      Number(process.env.SENDMAIL_TIMEOUT_MS || 20000),
+      'Failed to send email (connection timeout)'
+    );
 
     // Send confirmation email to user
     const confirmationEmail = {
@@ -84,7 +108,11 @@ app.post('/api/contact', async (req, res) => {
       `,
     };
 
-    await transporter.sendMail(confirmationEmail);
+    await withTimeout(
+      transporter.sendMail(confirmationEmail),
+      Number(process.env.SENDMAIL_TIMEOUT_MS || 20000),
+      'Failed to send confirmation email (connection timeout)'
+    );
 
     res.json({ 
       success: true, 
@@ -106,7 +134,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
 });
