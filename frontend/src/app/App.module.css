@@ -693,6 +693,15 @@ section {
   display: inline-block; /* To make border only as wide as text */
 }
 
+/* Full-width wrapper for SkillProficiency section (do not reuse .skills pill layout) */
+.skill-proficiency-section {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  overflow-x: clip;
+  box-sizing: border-box;
+}
+
 .skills {
   display: flex;
   flex-wrap: wrap;
@@ -729,6 +738,9 @@ section {
 /* Projects Section */
 .projects {
   background-color: var(--bg-color);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .projects-list {
   display: grid;
@@ -1314,6 +1326,11 @@ section {
   .projects-list {
     grid-template-columns: 1fr; /* Single column for projects */
     padding: 0 1rem; /* Add horizontal padding for projects list */
+  }
+  /* Extra space so project/skill content isn’t hidden behind floating social bar */
+  .projects .container,
+  .skill-proficiency-section .container {
+    padding-bottom: 5rem;
   }
   .title {
     font-size: clamp(1.8rem, 6vw, 2.8rem); /* Adjusted title size */

@@ -1,29 +1,43 @@
 .skillProficiency {
   padding: 60px 20px;
   background: var(--bg-color);
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: clamp(1.65rem, 5vw, 2.5rem);
   font-weight: 700;
   text-align: center;
   margin-bottom: 15px;
   color: var(--text-headings);
+  padding: 0 12px;
+  word-break: break-word;
+  line-height: 1.2;
 }
 
 .subtitle {
   text-align: center;
   color: var(--text-secondary);
   margin-bottom: 50px;
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+  padding: 0 16px;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.55;
+  box-sizing: border-box;
 }
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 25px;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card {
@@ -102,6 +116,9 @@
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary);
+  min-width: 0;
+  padding-right: 8px;
+  word-break: break-word;
 }
 
 .proficiency {
@@ -111,6 +128,8 @@
   background: rgba(106, 17, 203, 0.1);
   padding: 4px 10px;
   border-radius: 12px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .progressBar {
@@ -134,11 +153,12 @@
   }
 
   .title {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
   }
 
   .container {
     gap: 20px;
+    grid-template-columns: 1fr;
   }
 
   .card {

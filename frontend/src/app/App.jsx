@@ -6,7 +6,6 @@ import {
   useScroll,
   useSpring,
   AnimatePresence,
-  useInView,
 } from "framer-motion";
 
 import InputField from "../common/components/InputField/InputField";
@@ -359,22 +358,18 @@ const projects = [
 ];
 
 // Helper component for animating sections on scroll
-const AnimatedSection = ({ children, className, id }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-  return (
-    <motion.section
-      id={id}
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-    >
-      {children}
-    </motion.section>
-  );
-};
+const AnimatedSection = ({ children, className, id }) => (
+  <motion.section
+    id={id}
+    className={className}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.08, margin: "0px 0px -12% 0px" }}
+    transition={{ duration: 0.45 }}
+  >
+    {children}
+  </motion.section>
+);
 
 function App() {
   const form = useRef();
@@ -1129,7 +1124,7 @@ function App() {
       </AnimatePresence>
 
       {/* Skill Proficiency Section */}
-      <AnimatedSection id="Skills" className={style.skills}>
+      <AnimatedSection id="Skills" className={style["skill-proficiency-section"]}>
         <div className={style.container}>
           <SkillProficiency />
         </div>
